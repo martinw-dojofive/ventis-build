@@ -21,4 +21,4 @@ These steps are mandatory for EmbedOps build-images:
 ## Dependencies
 
 ## License
-==TODO: decide on and add license for these projects and this template==
+Copyright 2020 Dojo Five, LLC
