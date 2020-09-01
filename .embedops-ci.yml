@@ -1,15 +1,30 @@
 stages:
-  - build-img
+  - build-development
+  - build-release
 
-build-img:
+build-development:
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
-  stage: build-img
+  stage: build-development
   script: |
     echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
     /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile \
-    --destination=$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG --destination=$CI_REGISTRY_IMAGE:latest \
+    --destination=$CI_REGISTRY_IMAGE/development:$CI_COMMIT_SHA \
+    --label "org.opencontainers.image.revision"="$CI_COMMIT_SHA" --label "org.opencontainers.image.source"="$CI_REPOSITORY_URL" \
+    --label "org.opencontainers.image.created"="$(date -I)" --single-snapshot --snapshotMode=time
+  except:
+    - tags
+
+build-release:
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  stage: build-release
+  script: |
+    echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile \
+    --destination=$CI_REGISTRY_IMAGE --destination=$CI_REGISTRY_IMAGE:$CI_COMMIT_TAG \
     --label "org.opencontainers.image.revision"="$CI_COMMIT_SHA" --label "org.opencontainers.image.source"="$CI_REPOSITORY_URL" \
     --label "org.opencontainers.image.created"="$(date -I)" --single-snapshot --snapshotMode=time
   only:

@@ -20,5 +20,10 @@ These steps are mandatory for EmbedOps build-images:
 
 ## Dependencies
 
+## For Developers:
+  The containers are divided into the main container and a development container.
+- If working on a feature branch, do not add a tag to your branch so your changes are pushed to the development container. The SHA will be used as the tag.
+- When merging into the main branch, or want to push to the main container, add a tag and it will update the :latest tag as well as add the tag you originally added
+
 ## License
 Copyright 2020 Dojo Five, LLC
