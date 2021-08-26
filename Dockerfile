@@ -12,6 +12,7 @@ LABEL "org.opencontainers.image.authors"="Your Name(s) Here"
 
 # When installing packages from apt, don't install recommended packages, pin versions, 
 #      and clean up the lists dir after installs have been made to reduce space
+# Package versions in Ubuntu releases can be found here: https://packages.ubuntu.com/
 
 # RUN apt-get install -y --no-install-recommends \
 #                     <package name>=0.0.0  && \ 
@@ -20,6 +21,7 @@ LABEL "org.opencontainers.image.authors"="Your Name(s) Here"
 
 
 # When installing packages from pip, don't use the cache directory and pin versions
+# Package versions for pip can be found here: https://pypi.org/search/
 
 # RUN pip3 install --no-cache-dir \
 #                  <package name>==0.0.0
