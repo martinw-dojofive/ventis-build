@@ -5,8 +5,8 @@ LABEL "org.opencontainers.image.description"="Build image for the Ventis VM2000 
 LABEL "org.opencontainers.image.vendor"="Dojo Five"
 LABEL "org.opencontainers.image.authors"="Martin Wellard"
 
-RUN apt update && \
-	apt install -y gcc-arm-linux-gnueabihf make libssl-dev libarchive-dev
+RUN apt-get update && \
+	apt-get install -y gcc-arm-linux-gnueabihf make libssl-dev libarchive-dev
 ADD sysroot.tar.gz /
 
 ENV CC=arm-linux-gnueabihf-gcc
