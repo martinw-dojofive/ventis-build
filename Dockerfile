@@ -7,10 +7,10 @@ LABEL "org.opencontainers.image.authors"="Martin Wellard"
 
 RUN apt-get update && \
 	apt-get install -y --no-install-recommends \
-	gcc-arm-linux-gnueabihf \
-	make \
-	libssl-dev \
-	libarchive-dev  \
+	gcc-arm-linux-gnueabihf=4:7.4.0-1ubuntu2.3 \
+	make=4.1-9.1ubuntu1 \
+	libssl-dev=1.1.1-1ubuntu2.1~18.04.13 \
+	libarchive-dev=3.2.2-3.1ubuntu0.7  \
 	&& apt-get clean \
  	&& rm -rf /var/lib/apt/lists/*
 
