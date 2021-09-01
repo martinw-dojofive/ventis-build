@@ -10,7 +10,9 @@ RUN apt-get update && \
 	gcc-arm-linux-gnueabihf \
 	make \
 	libssl-dev \
-	libarchive-dev
+	libarchive-dev  \
+	&& apt-get clean \
+ 	&& rm -rf /var/lib/apt/lists/*
 
 ADD sysroot.tar.gz /
 
