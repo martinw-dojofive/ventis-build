@@ -6,7 +6,12 @@ LABEL "org.opencontainers.image.vendor"="Dojo Five"
 LABEL "org.opencontainers.image.authors"="Martin Wellard"
 
 RUN apt-get update && \
-	apt-get install -y gcc-arm-linux-gnueabihf make libssl-dev libarchive-dev
+	apt-get install -y --no-install-recommends \
+	gcc-arm-linux-gnueabihf \
+	make \
+	libssl-dev \
+	libarchive-dev
+
 ADD sysroot.tar.gz /
 
 ENV CC=arm-linux-gnueabihf-gcc
